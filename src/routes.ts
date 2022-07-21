@@ -1,17 +1,8 @@
 import express from "express";
-import nodemailer from "nodemailer";
-import { prisma } from "./prisma";
+import { prisma } from "./utils/prisma";
+import { transport } from "./services/sendMail";
 
 export const routes = express.Router();
-
-const transport = nodemailer.createTransport({
-  host: "smtp.mailtrap.io",
-  port: 2525,
-  auth: {
-    user: "ce3d51c4e37280",
-    pass: "2e18162c28108d",
-  },
-});
 
 routes.post("/feedbacks", async (req, res) => {
   const { type, comment, screenshot } = req.body;
